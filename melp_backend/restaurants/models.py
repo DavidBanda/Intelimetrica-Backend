@@ -1,4 +1,5 @@
 from melp_backend import db
+from melp_backend import ma
 
 
 # Restaurant Class/Model
@@ -26,3 +27,14 @@ class Restaurant(db.Model):
         self.state = state
         self.lat = lat
         self.lng = lng
+
+
+# Restaurant Schema
+class RestaurantSchema(ma.Schema):
+    class Meta:
+        fields = ('id', 'rating', 'name', 'site', 'id', 'email', 'phone', 'street', 'city', 'state', 'lat', 'lng')
+
+
+# Init schema
+restaurant_schema = RestaurantSchema()
+restaurants_schema = RestaurantSchema(many=True)
