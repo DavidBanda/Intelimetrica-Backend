@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/../Flask-ITCHII/.idea/Flask.iml" filepath="$PROJECT_DIR$/../Flask-ITCHII/.idea/Flask.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/Intelimetrica-Backend.iml" filepath="$PROJECT_DIR$/.idea/Intelimetrica-Backend.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../Python-Projects/flask_api/.idea/flask_api.iml" filepath="$PROJECT_DIR$/../Python-Projects/flask_api/.idea/flask_api.iml" />
     </modules>
   </component>
 </project>

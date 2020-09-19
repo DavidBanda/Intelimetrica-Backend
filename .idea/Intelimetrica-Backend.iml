@@ -7,5 +7,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="Flask" />
+    <orderEntry type="module" module-name="flask_api" />
   </component>
 </module>
