@@ -60,3 +60,25 @@ def update_restaurant(id):
     db.session.commit()
 
     return restaurant_schema.jsonify(restaurant)
+
+
+# Create Restaurant
+@restaurants.route('/restaurant', methods=['POST'])
+def add_restaurant():
+    rating = request.json['rating']
+    name = request.json['name']
+    site = request.json['site']
+    email = request.json['email']
+    phone = request.json['phone']
+    street = request.json['street']
+    city = request.json['city']
+    state = request.json['state']
+    lat = request.json['lat']
+    lng = request.json['lng']
+
+    new_restaurant = Restaurant(rating, name, site, email, phone, street,
+                                city, state, lat, lng)
+    db.session.add(new_restaurant)
+    db.session.commit()
+
+    return restaurant_schema.jsonify(new_restaurant)
