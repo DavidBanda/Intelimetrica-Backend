@@ -94,6 +94,7 @@ def get_close_restaurants():
     count = 0
     avg_rating = 0
     std = 0
+    rating = []
 
     all_restaurants = Restaurant.query.all()
 
@@ -104,11 +105,13 @@ def get_close_restaurants():
         if hypo <= rad:
             count += 1
             avg_rating += restaurant.rating
+            rating.append(restaurant.rating)
 
-    avg_rating /= count
+    avg_rating /= count  # get average rating
+
     # Standard deviation of rating of restaurants inside the circle
-    for restaurant in all_restaurants:
-        dev_std = (restaurant.rating - avg_rating)**2
+    for rate in rating:
+        dev_std = (rate - avg_rating)**2
         std += dev_std
     std /= count - 1
 
