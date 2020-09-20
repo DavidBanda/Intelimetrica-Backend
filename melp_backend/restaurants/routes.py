@@ -5,3 +5,11 @@ from melp_backend.restaurants.models import Restaurant, restaurant_schema, resta
 restaurants = Blueprint('restaurants', __name__)
 
 
+# GET all Restaurants
+@restaurants.route('/restaurants', methods=['GET'])
+def get_restaurants():
+    all_restaurants = Restaurant.query.all()
+    result = restaurants_schema.dump(all_restaurants)
+    return jsonify(result)
+
+
