@@ -1,5 +1,6 @@
 from flask import request, jsonify, Blueprint
 from melp_backend import db
+from math import sqrt
 from melp_backend.restaurants.models import Restaurant, restaurant_schema, restaurants_schema
 
 restaurants = Blueprint('restaurants', __name__)
@@ -82,3 +83,33 @@ def add_restaurant():
     db.session.commit()
 
     return restaurant_schema.jsonify(new_restaurant)
+
+
+# GET Close Restaurants
+@restaurants.route('/restaurants/statistics', methods=['GET'])
+def get_close_restaurants():
+    lat = float(request.args.get('latitude'))
+    lng = float(request.args.get('longitude'))
+    rad = float(request.args.get('radius'))
+    count = 0
+    avg_rating = 0
+    std = 0
+
+    all_restaurants = Restaurant.query.all()
+
+    for restaurant in all_restaurants:
+        base = abs(restaurant.lat - lat)
+        height = abs(restaurant.lng - lng)
+        hypo = sqrt((base**2)+(height**2))
+        if hypo <= rad:
+            count += 1
+            avg_rating += restaurant.rating
+
+    avg_rating /= count
+    # Standard deviation of rating of restaurants inside the circle
+    for restaurant in all_restaurants:
+        dev_std = (restaurant.rating - avg_rating)**2
+        std += dev_std
+    std /= count - 1
+
+    return jsonify({'count': count, 'avg': avg_rating, 'std': std})
