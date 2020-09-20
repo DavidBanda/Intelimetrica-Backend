@@ -18,3 +18,13 @@ def get_restaurants():
 def get_restaurant(id):
     restaurant = Restaurant.query.get_or_404(id)
     return restaurant_schema.jsonify(restaurant)
+
+
+# DELETE single Restaurant
+@restaurants.route('/restaurant/<id>', methods=['DELETE'])
+def delete_product(id):
+    restaurant = Restaurant.query.get_or_404(id)
+    db.session.delete(restaurant)
+    db.session.commit()
+
+    return restaurant_schema.jsonify(restaurant)
