@@ -22,9 +22,41 @@ def get_restaurant(id):
 
 # DELETE single Restaurant
 @restaurants.route('/restaurant/<id>', methods=['DELETE'])
-def delete_product(id):
+def delete_restaurant(id):
     restaurant = Restaurant.query.get_or_404(id)
     db.session.delete(restaurant)
+    db.session.commit()
+
+    return restaurant_schema.jsonify(restaurant)
+
+
+# UPDATE single Restaurant
+@restaurants.route('/restaurant/<id>', methods=['PUT'])
+def update_restaurant(id):
+    restaurant = Restaurant.query.get_or_404(id)
+
+    rating = request.json['rating']
+    name = request.json['name']
+    site = request.json['site']
+    email = request.json['email']
+    phone = request.json['phone']
+    street = request.json['street']
+    city = request.json['city']
+    state = request.json['state']
+    lat = request.json['lat']
+    lng = request.json['lng']
+
+    restaurant.rating = rating
+    restaurant.name = name
+    restaurant.site = site
+    restaurant.email = email
+    restaurant.phone = phone
+    restaurant.street = street
+    restaurant.city = city
+    restaurant.state = state
+    restaurant.lat = lat
+    restaurant.lng = lng
+
     db.session.commit()
 
     return restaurant_schema.jsonify(restaurant)
