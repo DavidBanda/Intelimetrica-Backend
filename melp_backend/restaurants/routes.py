@@ -13,3 +13,8 @@ def get_restaurants():
     return jsonify(result)
 
 
+# GET single Restaurant
+@restaurants.route('/restaurant/<id>', methods=['GET'])
+def get_restaurant(id):
+    restaurant = Restaurant.query.get_or_404(id)
+    return restaurant_schema.jsonify(restaurant)
