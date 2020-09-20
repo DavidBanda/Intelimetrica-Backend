@@ -1,5 +1,4 @@
-from melp_backend import db
-from melp_backend import ma
+from melp_backend import db, ma
 
 
 # Restaurant Class/Model
