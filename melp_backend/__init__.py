@@ -13,3 +13,7 @@ bcrypt = Bcrypt(app)
 ma = Marshmallow(app)
 login_manager = LoginManager(app)
 
+from melp_backend.restaurants.routes import restaurants
+
+app.register_blueprint(restaurants)
+
